@@ -1,0 +1,37 @@
+name: deploy workflow
+on: push
+
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.2
+      - name: test node js version
+        run: node --version
+      - name: install dependencies
+        run: npm ci
+      - name: run unit test
+        run: npm run test
+  lint-code: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.2
+      - name: test node js version
+        run: node --version
+      - name: install dependencies
+        run: npm ci
+      - name: run unit test
+        run: npm run lint
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6.0.2 
+      - name: install dependencies
+        run: npm ci
+      - name: build project
+        run: npm run build
+      

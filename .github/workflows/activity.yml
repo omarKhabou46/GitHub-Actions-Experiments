@@ -1,12 +1,17 @@
 name: activity workflow
-on: 
-  pull_request: 
+on:
+  pull_request:
     types:
       - opened
-      - edited
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - "dev-*" # dev dev-new dev-new-button
+      - "feat/**" # feat feat/new feat/new/button
 
 jobs:
-  test: 
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -17,3 +22,20 @@ jobs:
         run: npm ci
       - name: run unit test
         run: npm run test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: build project
+        run: npm run build
+      - name: upload dist file
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: |
+            dist
+            package.json

@@ -39,14 +39,14 @@ jobs:
           path: |
             ./dist
 
-    deploy:
-      needs: build
-      runs-on: ubuntu-latest
-      steps:
-        - name: download artifact
-          uses: actions/download-artifact@v4
-          with: 
-            name: dist-file
-        - name: check 
-          run: ls -al
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with: 
+          name: dist-file
+      - name: check 
+        run: ls -al
 

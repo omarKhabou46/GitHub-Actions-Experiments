@@ -37,5 +37,5 @@ jobs:
         with:
           name: dist-file
           path: |
-            dist
-            package.json
+            ../../dist
+            ../../package.json

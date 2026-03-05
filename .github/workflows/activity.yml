@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v3
       - name: test node js version
         run: node --version
       - name: install dependencies
@@ -33,7 +33,7 @@ jobs:
       - name: build project
         run: npm run build
       - name: upload dist file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist-file
           path: |

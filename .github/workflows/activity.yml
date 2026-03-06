@@ -56,5 +56,5 @@ jobs:
       - name: check 
         run: ls -al
       - name: show the output from build
-        run: echo ${{script-file}}
+        run: echo ${{ needs.build.outputs.script-file }}
 
